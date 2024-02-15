@@ -1,9 +1,19 @@
 import { useState } from "react";
-import { runTest } from "../api/test-calls";
+import { runTest, getTestData } from "../api/test-calls";
 
 function Sandbox() {
   const [userInput, setUserInput] = useState("");
   const [testResults, setTestResults] = useState([]);
+  const [testInfo, setTestInfo] = useState({
+    challenge_id: "",
+    challenge_name: "",
+    description: "",
+    example: "",
+    script: "",
+  });
+
+  // change num to test the two different ids
+  const num = 2;
 
   function handleInput(event) {
     setUserInput(event.target.value);
@@ -12,19 +22,23 @@ function Sandbox() {
   function handleSubmit(event) {
     event.preventDefault();
     setTestResults(["Just testing your function..."]);
-    runTest(userInput, 1).then((result) => {
+    runTest(userInput, num).then((result) => {
       const arrayOfResults = result.split("\n");
       setTestResults(arrayOfResults);
     });
   }
 
+  function handleClick() {
+    getTestData(num).then((data) => {
+      setTestInfo(data);
+    });
+  }
+
   return (
     <>
-      <p>
-        DNA Pairs Create a function that takes a string of DNA and matches each
-        base with its pair, returning a nested array. In DNA, C pairs with G and
-        T pairs with A.
-      </p>
+      <button onClick={handleClick}>Get Test</button>
+      <h2>{testInfo.challenge_name}</h2>
+      <p>{testInfo.description}</p>
       <form onSubmit={handleSubmit}>
         <input
           style={{ width: "50vw", height: "30vh" }}

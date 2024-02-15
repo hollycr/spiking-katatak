@@ -9,4 +9,9 @@ function runTest(userInput, challenge_id) {
     });
 }
 
-export { runTest };
+function getTestData(id) {
+  return axios.get(`http://localhost:9090/tests/${id}`).then(({ data }) => {
+    return data;
+  });
+}
+export { runTest, getTestData };
