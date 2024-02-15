@@ -11,9 +11,7 @@ function Sandbox() {
     example: "",
     script: "",
   });
-
-  // change num to test the two different ids
-  const num = 2;
+  const [chalNum, setChalNum] = useState(1);
 
   function handleInput(event) {
     setUserInput(event.target.value);
@@ -22,15 +20,20 @@ function Sandbox() {
   function handleSubmit(event) {
     event.preventDefault();
     setTestResults(["Just testing your function..."]);
-    runTest(userInput, num).then((result) => {
+    runTest(userInput, chalNum).then((result) => {
       const arrayOfResults = result.split("\n");
       setTestResults(arrayOfResults);
     });
   }
 
   function handleClick() {
+    if (chalNum === 1) {
+      setChalNum(2);
+    } else {
+      setChalNum(1);
+    }
     setTestResults([]);
-    getTestData(num).then((data) => {
+    getTestData(chalNum).then((data) => {
       setTestInfo(data);
     });
   }
