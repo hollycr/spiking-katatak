@@ -11,7 +11,7 @@ function Sandbox() {
     example: "",
     script: "",
   });
-  const [chalNum, setChalNum] = useState(1);
+  const [chalNum, setChalNum] = useState(2);
 
   function handleInput(event) {
     setUserInput(event.target.value);
@@ -20,6 +20,7 @@ function Sandbox() {
   function handleSubmit(event) {
     event.preventDefault();
     setTestResults(["Just testing your function..."]);
+
     runTest(userInput, chalNum).then((result) => {
       const arrayOfResults = result.split("\n");
       setTestResults(arrayOfResults);
@@ -27,11 +28,6 @@ function Sandbox() {
   }
 
   function handleClick() {
-    if (chalNum === 1) {
-      setChalNum(2);
-    } else {
-      setChalNum(1);
-    }
     setTestResults([]);
     getTestData(chalNum).then((data) => {
       setTestInfo(data);
