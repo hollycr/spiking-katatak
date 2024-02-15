@@ -1,4 +1,4 @@
-Spiking - running Jest tests on a server, using the DNA pairs kata from fundamentals.
+Spiking - running Jest tests on a server, using the DNA pairs and Get Tweet Data katas from fundamentals.
 
 to spin up the test server, cd into `be-practice-katatak` and use the command `node listen.js` in the terminal
 
