@@ -1,7 +1,8 @@
 describe("getTweetData", () => {
-  const data = JSON.parse(process.env.INPUT_TO_TEST);
+  const uniqueKey = `INPUT_TO_TEST${process.argv[3]}`;
+  const data = JSON.parse(process.env[uniqueKey]);
   const funcPart = data.slice(data.indexOf("{") + 1, data.length - 1).trim();
-  const getTweetData = new Function("dna", funcPart);
+  const getTweetData = new Function("tweet", funcPart);
   test("returns an object", () => {
     expect(typeof getTweetData("a tweet")).toBe("object");
   });
