@@ -23,7 +23,11 @@ function Sandbox() {
 
   return (
     <>
-      <p>code box</p>
+      <p>
+        DNA Pairs Create a function that takes a string of DNA and matches each
+        base with its pair, returning a nested array. In DNA, C pairs with G and
+        T pairs with A.
+      </p>
       <form onSubmit={handleSubmit}>
         <input
           style={{ width: "50vw", height: "30vh" }}
