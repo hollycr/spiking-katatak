@@ -5,7 +5,6 @@ function runTest(userInput, challenge_id) {
   return axios
     .post(`http://localhost:9090/run-test/${challenge_id}`, postBody)
     .then(({ data }) => {
-      console.log(data, "<< res in axios");
       return data;
     });
 }

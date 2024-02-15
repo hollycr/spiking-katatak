@@ -12,10 +12,7 @@ function Sandbox() {
   function handleSubmit(event) {
     event.preventDefault();
     setTestResults(["Just testing your function..."]);
-    console.log(userInput, "<< userinput client side");
     runTest(userInput, 1).then((result) => {
-      console.log("back in the browser");
-      console.log(result, "<<< result from runTest");
       const arrayOfResults = result.split("\n");
       setTestResults(arrayOfResults);
     });
