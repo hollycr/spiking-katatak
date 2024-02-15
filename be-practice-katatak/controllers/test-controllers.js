@@ -1,4 +1,4 @@
-const { insertTest } = require("../models/test-models");
+const { insertTest, fetchTestData } = require("../models/test-models");
 
 module.exports.postTest = (req, res, next) => {
   const { challenge_id } = req.params;
@@ -11,4 +11,15 @@ module.exports.postTest = (req, res, next) => {
     .catch((err) => {
       next(err);
     });
+};
+
+module.exports.getTestData = (req, res, next) => {
+  const { challenge_id } = req.params;
+  try {
+    const data = fetchTestData(challenge_id);
+    console.log(data, "<< data in controller");
+    res.status(200).send(data);
+  } catch (err) {
+    console.error(err);
+  }
 };

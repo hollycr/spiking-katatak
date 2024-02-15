@@ -1,26 +1,28 @@
 const { exec } = require("child_process");
 
-const challenges = { 1: "../__tests__/dna.test.js" };
+const tests = require("../tests-list");
 
 module.exports.insertTest = (inputToTest, challenge_id) => {
+  const list = tests.module;
+  const currentTest = {};
+  list.map((test) => {
+    if (test.challenge_id === Number(challenge_id)) {
+      Object.assign(currentTest, test);
+    }
+  });
+
   return new Promise((resolve, reject) => {
     process.env.INPUT_TO_TEST = JSON.stringify(inputToTest);
+    //console.log(process.env.INPUT_TO_TEST, "<< INPUT_TO_TEST IN MODEL");
 
-    console.log(process.env.INPUT_TO_TEST, "<< INPUT_TO_TEST IN MODEL");
-
-    // const funcPart = inputToTest
-    //   .slice(inputToTest.indexOf("{") + 1, inputToTest.length - 1)
-    //   .trim();
-
-    // console.log(funcPart, "<< funcPart");
-
-    exec(`npm run test ${challenges[1]}`, (error, stdout, stderr) => {
+    exec(`npm run test ${currentTest.script}`, (error, stdout, stderr) => {
       if (error) {
         const test_list = stderr.slice(
           stderr.indexOf(".js") + 5,
           stderr.indexOf(" ●")
         );
         resolve({
+          script_ran: currentTest.script,
           outcome: "ERROR",
           output: stderr,
           list: test_list,
@@ -38,4 +40,15 @@ module.exports.insertTest = (inputToTest, challenge_id) => {
       }
     });
   });
+};
+
+module.exports.fetchTestData = (challenge_id) => {
+  const list = tests.module;
+  const currentTest = {};
+  list.map((test) => {
+    if (test.challenge_id === Number(challenge_id)) {
+      Object.assign(currentTest, test);
+    }
+  });
+  return currentTest;
 };
