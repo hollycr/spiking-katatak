@@ -29,6 +29,7 @@ function Sandbox() {
   }
 
   function handleClick() {
+    setTestResults([]);
     getTestData(num).then((data) => {
       setTestInfo(data);
     });
